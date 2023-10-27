@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<!-- this html is inspired by  https://xbpeng.github.io/projects/ASE/index.html -->
+
+<head>
+    <title>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</title>
+
+    <style>
+        .div-plain {
+            padding-right: 15%;
+            padding-left: 15%;
+            font-size: medium;
+        }
+        .div-grey {
+            padding-left: 5%;
+            /* padding-right: 5%; */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: medium;
+            background-color: #f2f2f2;
+        }
+        
+    </style>
+
+    
+</head>
+
+<body>
+
+    <div class="div-plain">
+    <center>
+            <h1>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</h1>
+    </center>
+        <td>
+            <center>
+                Proc. ACM SIGGRAPH Asia 2023<br>
+                <br>
+                <nobr> <a href='https://wangchek.github.io/'>Yusen Feng</a></nobr> (1)&emsp;&emsp; <nobr> <a
+                        href="http://xiyanxu.cn"> Xiyan Xu</a>
+                    (2)</nobr>
+                &emsp;&emsp; <nobr><a href='http://libliu.info/'>Libin Liu†</a> (3)</nobr> <br>
+                <br>
+                <nobr>(1) School of Computer Science, Peking University </nobr><br>
+                <nobr>(3) School of Electrionics Engineering and Computer Science, Peking University </nobr><br>
+                <nobr>(3) School of Intelligence Science and Technology, Peking University </nobr><br>
+                <br>
+                <img style="vertical-align:middle" src="static/teaser-new.png" width="100%" height="inherit" />
+            </center>
+        </td>
+
+        <br>
+
+        <td>
+            <hr>
+            <h3 style="margin-bottom:10px;">Abstract</h3>
+            In this paper, we present a simulation and control framework for generating biomechanically plausible motion for muscle-actuated characters. We incorporate a fatigue dynamics model, the 3CC-r model, into the widely-adopted Hill-type muscle model to simulate the development and recovery of fatigue in muscles, which creates a natural evolution of motion style caused by the accumulation of fatigue from prolonged activities. To address the challenging problem of controlling a musculoskeletal system with high degrees of freedom, we propose a novel muscle-space control strategy based on PD control. Our simulation and control framework facilitates the training of a generative model for muscle-based motion control, which we refer to as MuscleVAE. By leveraging the variational autoencoders (VAEs), MuscleVAE is capable of learning a rich and flexible latent representation of skills from a large unstructured motion dataset, encoding not only motion features but also muscle control and fatigue properties. We demonstrate that the MuscleVAE model can be efficiently trained using a model-based approach, resulting in the production of high-fidelity motions and enabling a variety of downstream tasks.
+        </td>
+
+        <td>
+            <h3> Paper: [<a href="static/author_version.pdf">PDF</a>] &nbsp; &nbsp; &nbsp; Preprint: [<a
+                    href="https://arxiv.org/">arXiv</a>] &nbsp; &nbsp; &nbsp; Video: [<nobr><a
+                        href="https://www.youtube.com/">Youtube</a> | <a
+                        href="https://www.bilibili.com/"> Bilibili</a>]</nobr> &nbsp; &nbsp; &nbsp;
+                Code: [<a href="https://github.com/wangchek/MuscleVAE">Github</a>
+                ]
+            </h3>
+        </td>
+
+
+        <br>
+        <br>
+    </div>
+    <div class = "div-plain">
+    <div class="div-grey" >
+        <td>
+            <p style="font-size:large;">
+                Prediction of world model:
+            </p>
+        </td>
+
+        <td>
+            <center>
+                <p>
+                    <img style="vertical-align:middle" src="static/gif/prediction.gif" width="40%" height="inherit" />
+                </p>
+            </center>
+        </td>
+
+        <td>
+            <p style="font-size:large;">
+                Random sampling in the latent space:
+            </p>
+        </td>
+
+        <td>
+            <center>
+                <p>
+                    <img style="vertical-align:middle" src="static/gif/CrowdSimulation.gif" width="29%"
+                        height="inherit" />
+                    <img style="vertical-align:middle" src="static/gif/dance1.gif" width="29%" height="inherit" />
+                </p>
+            </center>
+        </td>
+
+        <td>
+            <p style="font-size:large;">
+                Speed/Style and direction control with user input:
+            </p>
+        </td>
+
+        <td>
+            <center>
+                <p>
+                    <img style="vertical-align:middle" src="static/gif/speed.gif" width="29%" height="inherit" />
+                    <img style="vertical-align:middle" src="static/gif/skill.gif" width="29%" height="inherit" />
+                </p>
+            </center>
+        </td>
+
+        <td>
+            <p style="font-size:large;">
+                Resistance to external perturbations:
+            </p>
+        </td>
+
+        <td>
+            <center>
+                <p>
+                    <img style="vertical-align:middle" src="static/gif/push.gif" width="29%" height="inherit" />
+                    <img style="vertical-align:middle" src="static/gif/box.gif" width="29%" height="inherit" />
+                </p>
+            </center>
+        </td>
+
+        <td>
+            <p style="font-size:large;">
+                For more details, please refer to <a
+                    href="https://arxiv.org/abs/2210.06063">our paper</a>.
+            </p>
+        </td>
+
+    
+
+    <td>
+        <center><video width=50% controls>
+                <source src="static\supplementary.mp4" type="video/mp4">
+            </video>
+        </center>
+
+    </td>
+
+
+    </div>
+    </div>
+    <!-- <iframe width="884" height="497" src="https://www.youtube.com/embed/ELZ7m4rLCgk" title="[SIGAsia 22] ControlVAE: Model-Based Learning of Generative Controllers for Physics-Based Characters" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+
+
+    <!-- </div> -->
+</body>
+
+
+
+</html>
