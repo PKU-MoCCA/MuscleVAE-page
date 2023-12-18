@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<!-- this html is inspired by  https://xbpeng.github.io/projects/ASE/index.html -->
+
+<head>
+    <title>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</title>
+
+    <style>
+        .div-plain {
+            padding-right: 15%;
+            padding-left: 15%;
+            font-size: medium;
+        }
+        .div-grey {
+            padding-left: 5%;
+            /* padding-right: 5%; */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: medium;
+            background-color: #f2f2f2;
+        }
+        .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+        padding: 20px;
+        }
+
+        .grid-container1 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+        padding: 20px;
+        }
+        .grid-container2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        padding: 20px;
+        }
+        .video-item {
+            text-align: center;
+        }
+        .video-item video {
+            width: 100%;
+            max-width: 1280px;
+        }
+
+        .centered-title {
+        text-align: center;
+        
+    }
+        
+    </style>
+
+    
+</head>
+
+<body>
+
+    <div class="div-plain">
+    <center>
+            <h1>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</h1>
+    </center>
+        <td>
+            <center>
+                Proc. ACM SIGGRAPH Asia 2023<br>
+                <br>
+                <nobr> <a href='https://wangchek.github.io/'>Yusen Feng</a></nobr> (1)&emsp;&emsp; <nobr> <a
+                        href="http://xiyanxu.cn"> Xiyan Xu</a>
+                    (2)</nobr>
+                &emsp;&emsp; <nobr><a href='http://libliu.info/'>Libin Liu†</a> (3)</nobr> <br>
+                <br>
+                <nobr>(1) School of Computer Science, Peking University </nobr><br>
+                <nobr>(3) School of Electrionics Engineering and Computer Science, Peking University </nobr><br>
+                <nobr>(3) School of Intelligence Science and Technology, Peking University </nobr><br>
+                <br>
+                <img style="vertical-align:middle" src="static/teaser4k.png" width="100%" height="inherit" />
+            </center>
+        </td>
+
+        <br>
+
+        <td>
+            <hr>
+            <h3 style="margin-bottom:10px;">Abstract</h3>
+            In this paper, we present a simulation and control framework for generating biomechanically plausible motion for muscle-actuated characters. We incorporate a fatigue dynamics model, the 3CC-r model, into the widely-adopted Hill-type muscle model to simulate the development and recovery of fatigue in muscles, which creates a natural evolution of motion style caused by the accumulation of fatigue from prolonged activities. To address the challenging problem of controlling a musculoskeletal system with high degrees of freedom, we propose a novel muscle-space control strategy based on PD control. Our simulation and control framework facilitates the training of a generative model for muscle-based motion control, which we refer to as MuscleVAE. By leveraging the variational autoencoders (VAEs), MuscleVAE is capable of learning a rich and flexible latent representation of skills from a large unstructured motion dataset, encoding not only motion features but also muscle control and fatigue properties. We demonstrate that the MuscleVAE model can be efficiently trained using a model-based approach, resulting in the production of high-fidelity motions and enabling a variety of downstream tasks.
+        </td>
+
+        <td>
+            <h3> Paper: [<a href="static/MuscleVAE_author_version.pdf">PDF</a>] &nbsp; &nbsp; &nbsp; Supplementary: [<a
+                    href="static/MuscleVAE_appendix_author_version.pdf">appendix</a>] &nbsp; &nbsp; &nbsp; Video: [<nobr><a
+                        href="https://www.youtube.com/watch?v=NO06GDPHto4">Youtube</a> | <a
+                        href="https://www.bilibili.com/video/BV1HC4y1u7Gk/"> Bilibili</a>]</nobr> &nbsp; &nbsp; &nbsp;
+                Code: [<a href="https://github.com/PKU-MoCCA/MuscleVAE">Github(Coming Soon)</a>
+                ]
+            </h3>
+        </td>
+
+
+        <br>
+        <br>
+    </div>
+
+
+<h2 class="centered-title">Tracking Results</h2>
+<div class="grid-container">
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_walk.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Walk</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_sidewalk.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Side Walk</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_spinjump.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Spin Jump</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_run.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Run</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_jumpspinkick.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Jump Spin Kick</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_horsestance.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Horse Stance</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_random_motion.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Random Motion</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_unsceen_locomotion.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Unseen Locomotion</p>
+  </div>
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/tracking/converted_unsceen_dance.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Unseen Dance</p>
+  </div>
+</div>
+
+<h2 class="centered-title">Generation Results</h2>
+<div class="grid-container2">
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/generation/converted_random_generation.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Random Generation</p>
+  </div>
+
+  <div class="video-item">
+      <video controls>
+          <source src="./static/videos/generation/converted_speed_control.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <p>Velocity Control</p>
+  </div>
+
+</div>
+
+<h2 class="centered-title">Fatigue Results</h2>
+<div class="grid-container1">
+  <div class="video-item">
+    <video controls>
+        <source src="./static/videos/fatigue/converted_recovery2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <p>Fatigue and Recovery During Long Run</p>
+  </div>
+  
+
+</div>
+
+    
+
+
+</div>
+</div>
+    <!-- <iframe width="884" height="497" src="https://www.youtube.com/embed/ELZ7m4rLCgk" title="[SIGAsia 22] ControlVAE: Model-Based Learning of Generative Controllers for Physics-Based Characters" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+
+
+    <!-- </div> -->
+</body>
+
+
+
+</html>

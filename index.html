@@ -1,164 +1,395 @@
 <!DOCTYPE html>
 <html>
-<!-- this html is inspired by  https://xbpeng.github.io/projects/ASE/index.html -->
 
 <head>
-    <title>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</title>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters">
+  <meta name="keywords" content="Muscle Simulation; Physical Animation; Reinforcement Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">	
+  <meta name="google-site-verification" content="c-OO9s8QGRGOjdJTz3dyfcYlgskfbLXnwRRAzQLcoWw" />
+  <title>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</title>
 
-    <style>
-        .div-plain {
-            padding-right: 15%;
-            padding-left: 15%;
-            font-size: medium;
-        }
-        .div-grey {
-            padding-left: 5%;
-            /* padding-right: 5%; */
-            padding-top: 10px;
-            padding-bottom: 10px;
-            font-size: medium;
-            background-color: #f2f2f2;
-        }
-        
-    </style>
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
 
-    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
 </head>
 
 <body>
 
-    <div class="div-plain">
-    <center>
-            <h1>MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</h1>
-    </center>
-        <td>
-            <center>
-                Proc. ACM SIGGRAPH Asia 2023<br>
-                <br>
-                <nobr> <a href='https://wangchek.github.io/'>Yusen Feng</a></nobr> (1)&emsp;&emsp; <nobr> <a
-                        href="http://xiyanxu.cn"> Xiyan Xu</a>
-                    (2)</nobr>
-                &emsp;&emsp; <nobr><a href='http://libliu.info/'>Libin Liu†</a> (3)</nobr> <br>
-                <br>
-                <nobr>(1) School of Computer Science, Peking University </nobr><br>
-                <nobr>(3) School of Electrionics Engineering and Computer Science, Peking University </nobr><br>
-                <nobr>(3) School of Intelligence Science and Technology, Peking University </nobr><br>
-                <br>
-                <img style="vertical-align:middle" src="static/teaser4k.png" width="100%" height="inherit" />
-            </center>
-        </td>
-
-        <br>
-
-        <td>
-            <hr>
-            <h3 style="margin-bottom:10px;">Abstract</h3>
-            In this paper, we present a simulation and control framework for generating biomechanically plausible motion for muscle-actuated characters. We incorporate a fatigue dynamics model, the 3CC-r model, into the widely-adopted Hill-type muscle model to simulate the development and recovery of fatigue in muscles, which creates a natural evolution of motion style caused by the accumulation of fatigue from prolonged activities. To address the challenging problem of controlling a musculoskeletal system with high degrees of freedom, we propose a novel muscle-space control strategy based on PD control. Our simulation and control framework facilitates the training of a generative model for muscle-based motion control, which we refer to as MuscleVAE. By leveraging the variational autoencoders (VAEs), MuscleVAE is capable of learning a rich and flexible latent representation of skills from a large unstructured motion dataset, encoding not only motion features but also muscle control and fatigue properties. We demonstrate that the MuscleVAE model can be efficiently trained using a model-based approach, resulting in the production of high-fidelity motions and enabling a variety of downstream tasks.
-        </td>
-
-        <td>
-            <h3> Paper: [<a href="static/author_version.pdf">PDF</a>] &nbsp; &nbsp; &nbsp; Supplementary: [<a
-                    href="static/appendix.pdf">appendix</a>] &nbsp; &nbsp; &nbsp; Video: [<nobr><a
-                        href="https://www.youtube.com/">Youtube</a> | <a
-                        href="https://www.bilibili.com/"> Bilibili</a>]</nobr> &nbsp; &nbsp; &nbsp;
-                Code: [<a href="https://github.com/wangchek/MuscleVAE">Github(Coming Soon)</a>
-                ]
-            </h3>
-        </td>
-
-
-        <br>
-        <br>
+  <!-- Name and Author list and links -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MuscleVAE: Model-Based Controllers of Muscle-Actuated Characters</h1>
+            <div class="is-size-4 publication-authors">
+              <span class="author-block"><a href="https://wangchek.github.io/" target="_blank">Yusen Feng</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://xiyan-xu.github.io/" target="_blank">Xiyan Xu</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://libliu.info/" target="_blank">Libin Liu†</a><sup>1,2</sup></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Peking University, China<sup>1</sup>,</span> 
+              <span class="author-block"> National Key Lab of General AI, China<sup>2</sup></span> 
+            </div>
+            
+            <iframe name="mainframe" style="width: 1pt; height: 1pt"> </iframe>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2312.07340" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=NO06GDPHto4" target="mainframe" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Youtube</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://www.bilibili.com/video/BV1HC4y1u7Gk/" target="mainframe" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Bilibili</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/PKU-MoCCA/MuscleVAE" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div> 
+          
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- <div class = "div-plain">
-    <div class="div-grey" >
-        <td>
-            <p style="font-size:large;">
-                Prediction of world model:
+  </section>
+
+  <!-- <section class="section">
+    <div class="container is-max-desktop"> -->
+      <!-- teaser image. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <img src="./static/teaser4k.png" width="100%" />
+          <!-- </iframe> -->
+        </div>
+      </div>
+      <!--/ teaser image. -->
+    <!-- </div>
+  </section> -->
+
+  <!-- <section class="section">
+    <div class="container is-max-desktop"> -->
+      
+
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              In this paper, we present a simulation and control framework for generating biomechanically plausible motion for muscle-actuated characters. We incorporate a fatigue dynamics model, the 3CC-r model, into the widely-adopted Hill-type muscle model to simulate the development and recovery of fatigue in muscles, which creates a natural evolution of motion style caused by the accumulation of fatigue from prolonged activities. To address the challenging problem of controlling a musculoskeletal system with high degrees of freedom, we propose a novel muscle-space control strategy based on PD control. Our simulation and control framework facilitates the training of a generative model for muscle-based motion control, which we refer to as MuscleVAE. By leveraging the variational autoencoders (VAEs), MuscleVAE is capable of learning a rich and flexible latent representation of skills from a large unstructured motion dataset, encoding not only motion features but also muscle control and fatigue properties. We demonstrate that the MuscleVAE model can be efficiently trained using a model-based approach, resulting in the production of high-fidelity motions and enabling a variety of downstream tasks.
             </p>
-        </td>
 
-        <td>
-            <center>
-                <p>
-                    <img style="vertical-align:middle" src="static/gif/prediction.gif" width="40%" height="inherit" />
-                </p>
-            </center>
-        </td>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    <!-- </div>
 
-        <td>
-            <p style="font-size:large;">
-                Random sampling in the latent space:
-            </p>
-        </td>
+  </section> -->
+      
+  <!-- <section class="section">
+    <div class="container is-max-desktop"> -->
+      <!-- pipeline image. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Pipeline</h2>
+          <img src="./static/pipeline.png" width="100%" />
+          </iframe>
+        </div>
+      </div>
+      <!--/ pipeline image. -->
+      
+    <!-- </div>
 
-        <td>
-            <center>
-                <p>
-                    <img style="vertical-align:middle" src="static/gif/CrowdSimulation.gif" width="29%"
-                        height="inherit" />
-                    <img style="vertical-align:middle" src="static/gif/dance1.gif" width="29%" height="inherit" />
-                </p>
-            </center>
-        </td>
+  </section> -->
 
-        <td>
-            <p style="font-size:large;">
-                Speed/Style and direction control with user input:
-            </p>
-        </td>
-
-        <td>
-            <center>
-                <p>
-                    <img style="vertical-align:middle" src="static/gif/speed.gif" width="29%" height="inherit" />
-                    <img style="vertical-align:middle" src="static/gif/skill.gif" width="29%" height="inherit" />
-                </p>
-            </center>
-        </td>
-
-        <td>
-            <p style="font-size:large;">
-                Resistance to external perturbations:
-            </p>
-        </td>
-
-        <td>
-            <center>
-                <p>
-                    <img style="vertical-align:middle" src="static/gif/push.gif" width="29%" height="inherit" />
-                    <img style="vertical-align:middle" src="static/gif/box.gif" width="29%" height="inherit" />
-                </p>
-            </center>
-        </td>
-
-        <td>
-            <p style="font-size:large;">
-                For more details, please refer to <a
-                    href="https://arxiv.org/abs/2210.06063">our paper</a>.
-            </p>
-        </td>
-
-    
-
-    <td>
-        <center><video width=50% controls>
-                <source src="static\supplementary.mp4" type="video/mp4">
+  <!-- Can be used as comparison. -->
+  <section class="hero is-light ">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="column is-centered has-text-centered">
+          <div class="content">
+            <h2 class="title is-2">Tracking </h2>
+          </div>
+        </div>
+        <!--/ Concurrent Work. -->
+        <div class="columns is-centered">
+          <p>
+            Our character can reproduce the motions accurately using muscles.
+            The character is capable of imitating highly dynamic movements. 
+            Even for those are not seen during training.
+          </p>
+        </div>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_walk.mp4" type="video/mp4">
             </video>
-        </center>
+            <p>
+              Walk
+            </p>
+          </div>
+          
 
-    </td> -->
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_run.mp4" type="video/mp4">
+            </video>
+            <p>
+              Run
+            </p>
+          </div>
+        </div>
+        
+        <div class="columns is-centered">
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_spinjump.mp4" type="video/mp4">
+            </video>
+            <p>
+              Spin Jump
+            </p>
+          </div>
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_jumpspinkick.mp4" type="video/mp4">
+            </video>
+            <p>
+              Jump Spin Kick
+            </p>
+          </div>
 
+          
+        </div>
+
+        
+
+        <div class="columns is-centered">
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_horsestance.mp4" type="video/mp4">
+            </video>
+            <p>
+              Horse Stance
+            </p>
+          </div>
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_random_motion.mp4" type="video/mp4">
+            </video>
+            <p>
+              Random Motion
+            </p>
+          </div>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_unsceen_locomotion.mp4" type="video/mp4">
+            </video>
+            <p>
+              Unseen Locomotion
+            </p>
+          </div>
+
+          <div class="column content has-text-centered">
+            
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/tracking/converted_unsceen_dance.mp4" type="video/mp4">
+            </video>
+            <p>
+              Unseen Dance
+            </p>
+          </div>
+        </div>
+
+
+        <!-- <div class="columns is-centered">
+          <p>
+            Tracking output of motion latent diffution model.
+          </p>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!--/ Video List with description for each one. -->
+  <section class="hero ">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="column is-centered has-text-centered">
+          <div class="content">
+            <h2 class="title is-2">Random Sampling </h2>
+            <p>
+              Our character is controlled by the prior network for random sampling in latent space. The character is able to perform diverse set of skills. 
+              While generating natural transitions between them.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="carousel-item active">
+          <div class="column is-centered has-text-centered">
+
+            <video poster="" id="steve" autoplay controls muted loop height="80%">
+              <source src="./static/videos/generation/converted_random_generation.mp4" type="video/mp4">
+            </video>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="column is-centered has-text-centered">
+          <div class="content">
+            <h2 class="title is-2">Velocity Control </h2>
+            <p>
+              Using high level policy, direction and speed control can be achieved. 
+              We can see here that the character can follows the control accurately and can even handle sharp turns smoothly.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="carousel-item active">
+          <div class="column is-centered has-text-centered">
+
+            <video poster="" id="steve" autoplay controls muted loop height="80%">
+              <source src="./static/videos/generation/converted_speed_control.mp4" type="video/mp4">
+            </video>
+
+          </div>
+        </div>
+
+
+
+  
+        
+      </div>
 
     </div>
+
+  </section>
+
+  
+
+
+
+
+
+  <!--/ Video List with description for each one. -->
+  <section class="hero is-light ">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="column is-centered has-text-centered">
+          <div class="content">
+            <h2 class="title is-2">Fatigue Results</h2>
+            <p>
+              Our character is instructed to run forward and then to recover by adopting slow walk. 
+              The character can regain its force by resting and run again. 
+              MuscleVAE can generate fatigue data from motions that does not initially include fatigue characteristics. 
+            </p>
+          </div>
+
+          <div class="carousel-item active">
+            <div class="column is-centered has-text-centered">
+              <video poster="" id="steve1" autoplay controls muted loop height="100%">
+                <source src="./static/videos/fatigue/converted_recovery2.mp4" type="video/mp4">
+              </video>
+              
+            </div>
+          </div>
+          
+        </div>
+       
+        
+        </div>
+
+      </div>
     </div>
-    <!-- <iframe width="884" height="497" src="https://www.youtube.com/embed/ELZ7m4rLCgk" title="[SIGAsia 22] ControlVAE: Model-Based Learning of Generative Controllers for Physics-Based Characters" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+  </section>
 
 
 
-    <!-- </div> -->
+
+  
+
+
+  <footer class="footer">
+    
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want
+            to reuse their <a href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them
+            appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+
+  <script>
+		bulmaCarousel.attach('#carousel-demo', {
+			slidesToScroll: 1,
+			slidesToShow: 4
+		});
+		</script>
 </body>
-
-
 
 </html>
